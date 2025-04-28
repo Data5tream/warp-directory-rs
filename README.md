@@ -16,5 +16,34 @@ Add the following to your zsh configuration file (e.g., `~/.zshrc`) (other shell
 eval "$(warp-directory init zsh)"
 ```
 
-Source your config or open a new terminal. Now you can use the `warp` command (checkout `warp
---help). 
+Source your config or open a new terminal. Now you can use the `warp` command (checkout
+`warp --help`).
+
+## Usage
+
+List warp points:
+
+```bash
+warp list
+```
+
+Add a warp point:
+
+```bash
+warp add <name> <path>
+```
+
+If `<path>` is not provided, the current directory will be used. You can add a description that will
+be shown when using `warp list` by using the `--description` flag.
+
+Remove a warp point:
+
+```bash
+warp delete <name>
+```
+
+Show the help message:
+
+```bash
+warp --help
+```

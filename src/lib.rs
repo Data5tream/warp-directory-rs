@@ -5,6 +5,7 @@ use crate::commands::{add_warp_point, delete_warp_point, list_warp_points, warp_
 
 mod commands;
 mod storage;
+mod util;
 
 fn build_clap_styles() -> styling::Styles {
     styling::Styles::styled()
@@ -38,8 +39,7 @@ fn construct_command() -> Command {
                 .alias("add-dir")
                 .about("Add a directory warp point")
                 .long_about("Add a directory warp point. All direct subdirectories will be added as warp points.")
-                .arg(arg!([name] "Name of the warp point").required(true))
-                .arg(arg!([path] "Target path of the warp point").required(true))
+                .arg(arg!([path] "Target path of the warp point").required(false))
                 .arg(arg!(-f --force "Force overwrite an existing warp point").required(false))
                 .arg(
                     arg!(--description <description> "Description of the warp point")
@@ -139,6 +139,9 @@ pub fn app() {
             }
         }
         Some(("add", submatches)) => add_warp_point(submatches),
+        Some(("add-directory", submatches)) => {
+            commands::add_warp_directory(submatches);
+        }
         Some(("list", _)) => list_warp_points(),
         Some(("delete", submatches)) => delete_warp_point(submatches),
         Some(("init", submatches)) => {

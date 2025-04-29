@@ -61,7 +61,9 @@ pub fn save_warp_point(new_warp_point: WarpPoint, force: bool) {
             found = true;
             if force {
                 warp_point.path = new_warp_point.path.clone();
-                warp_point.description = new_warp_point.description.clone();
+                warp_point
+                    .description
+                    .clone_from(&new_warp_point.description);
             } else {
                 eprintln!(
                     "Warp point with name '{}' already exists. Use --force to overwrite.",

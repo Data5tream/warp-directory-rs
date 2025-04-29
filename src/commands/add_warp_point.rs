@@ -1,13 +1,7 @@
 use clap::ArgMatches;
-use std::path::Path;
 
 use crate::storage::{save_warp_point, WarpPoint};
-
-fn get_current_directory() -> Box<Path> {
-    std::env::current_dir()
-        .expect("Unable to get current directory")
-        .into_boxed_path()
-}
+use crate::util::get_current_directory;
 
 pub fn add_warp_point(matches: &ArgMatches) {
     let name = matches.get_one::<String>("name").unwrap();
@@ -28,4 +22,6 @@ pub fn add_warp_point(matches: &ArgMatches) {
     };
 
     save_warp_point(warp_point, force);
+
+    println!("Warp point '{name}' added at path: {}", path.display());
 }

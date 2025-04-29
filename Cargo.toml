@@ -4,6 +4,8 @@ version = "0.1.0"
 edition = "2024"
 authors = ["Simon Barth <data5tream@protonmail.com>"]
 license = "GPL-3.0-or-later"
+repository = "https://github.com/Data5tream/warp-directory-rs"
+categories = ["command-line-utilities"]
 
 [lints.clippy]
 pedantic = "warn"

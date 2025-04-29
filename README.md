@@ -1,23 +1,37 @@
 # warp-directory-rs
 
-Save a list of directories and easily switch to them.
+![Crates.io Version](https://img.shields.io/crates/v/warp-directory)
+![GitHub Release](https://img.shields.io/github/v/release/data5tream/warp-directory-rs?label=GitHub%20version)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/data5tream/warp-directory-rs/lint.yml?label=clippy)
+![GitHub License](https://img.shields.io/github/license/data5tream/warp-directory-rs)
+
+Save a list of directories and easily switch to them. Currently only supports zsh.
 
 ## Installation
 
-Clone the repository and install the `warp-directory` binary using `cargo` (prebuilds comming soon):
+### Via cargo
+
+Install the `warp-directory` binary using `cargo`:
+
+```bash
+cargo install warp-directory
+```
+
+### Build from source
+
+Clone the repository and install the `warp-directory` binary using `cargo`:
 
 ```bash
 cargo install --path .
 ```
 
-Add the following to your zsh configuration file (e.g., `~/.zshrc`) (other shells coming soon):
+Add the following to your zsh configuration file (e.g., `~/.zshrc`):
 
 ```bash
 eval "$(warp-directory init zsh)"
 ```
 
-Source your config or open a new terminal. Now you can use the `warp` command (checkout
-`warp --help`).
+Source your config or open a new terminal.
 
 ## Usage
 

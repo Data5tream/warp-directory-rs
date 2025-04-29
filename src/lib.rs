@@ -88,7 +88,7 @@ fn print_init(shell: Option<&str>) {
             ignored_args.push(String::from(alias));
         }
         if let Some(short_flag) = sub.get_short_flag() {
-            ignored_args.push(format!("-{}", short_flag));
+            ignored_args.push(format!("-{short_flag}"));
         }
         if let Some(long_flag) = sub.get_long_flag() {
             ignored_args.push(format!("--{long_flag}"));

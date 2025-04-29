@@ -5,7 +5,7 @@
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/data5tream/warp-directory-rs/lint.yml?label=clippy)
 ![GitHub License](https://img.shields.io/github/license/data5tream/warp-directory-rs)
 
-Save a list of directories and easily switch to them. Currently only supports zsh.
+Save a list of directories and easily switch to them. Currently, zsh and bash are supported.
 
 ## Installation
 
@@ -25,10 +25,20 @@ Clone the repository and install the `warp-directory` binary using `cargo`:
 cargo install --path .
 ```
 
-Add the following to your zsh configuration file (e.g., `~/.zshrc`):
+## Configuration
+
+Add the following to your zsh configuration file (e.g., `~/.zshrc` or `~/.bashrc`):
+
+If running zsh:
 
 ```bash
 eval "$(warp-directory init zsh)"
+```
+
+Or, if you run bash:
+
+```bash
+eval "$(warp-directory init bash)"
 ```
 
 Source your config or open a new terminal.

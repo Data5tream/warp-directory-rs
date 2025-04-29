@@ -1,6 +1,6 @@
 use clap::ArgMatches;
 
-use crate::storage::{save_warp_point, WarpPoint};
+use crate::storage::{WarpPoint, save_warp_point};
 use crate::util::get_current_directory;
 
 pub fn add_warp_point(matches: &ArgMatches) {

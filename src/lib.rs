@@ -1,5 +1,5 @@
 use clap::builder::styling;
-use clap::{arg, Command};
+use clap::{Command, arg};
 
 use crate::commands::{add_warp_point, delete_warp_point, list_warp_points, warp_to_point};
 
@@ -114,6 +114,32 @@ function warp() {{
     local dir
     dir=$(warp-directory "$first" "$@") || return $?
     [[ -d "$dir" ]] && cd "$dir" || {{ [[ -n "$dir" ]] && print -r -- "$dir"; return 1; }}
+}}
+"#
+            );
+        }
+        Some("bash") => {
+            println!(
+                r#"
+function warp() {{
+    local first="$1"
+    shift
+
+    case "$first" in
+        {ignored_arg_string})
+            warp-directory "$first" "$@"
+            return $?
+            ;;
+    esac
+
+    local dir
+    dir=$(warp-directory "$first" "$@") || return $?
+    if [[ -d "$dir" ]]; then
+        cd "$dir"
+    elif [[ -n "$dir" ]]; then
+        echo "$dir"
+        return 1
+    fi
 }}
 "#
             );

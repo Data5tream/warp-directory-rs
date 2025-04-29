@@ -1,4 +1,4 @@
-use crate::storage::{save_warp_point, WarpPoint};
+use crate::storage::{WarpPoint, save_warp_point};
 use crate::util::get_current_directory;
 use std::path::{Path, PathBuf};
 

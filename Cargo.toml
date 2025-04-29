@@ -4,7 +4,6 @@ version = "0.1.0"
 edition = "2024"
 authors = ["Simon Barth <data5tream@protonmail.com>"]
 license = "GPL-3.0-or-later"
-license-file = "LICENSE"
 
 [lints.clippy]
 pedantic = "warn"

@@ -73,13 +73,46 @@ fn construct_command() -> Command {
 }
 
 fn print_init(shell: Option<&str>) {
+    let command = construct_command();
+    let mut ignored_args: Vec<String> = vec![
+        "help".into(),
+        "--help".into(),
+        "-h".into(),
+        "--version".into(),
+        "-V".into(),
+    ];
+
+    for sub in command.get_subcommands() {
+        ignored_args.push(String::from(sub.get_name()));
+        for alias in sub.get_aliases() {
+            ignored_args.push(String::from(alias));
+        }
+        if let Some(short_flag) = sub.get_short_flag() {
+            ignored_args.push(format!("-{}", short_flag));
+        }
+        if let Some(long_flag) = sub.get_long_flag() {
+            ignored_args.push(format!("--{long_flag}"));
+        }
+    }
+    let ignored_arg_string = ignored_args.join("|");
+
     match shell {
         Some("zsh") | None => {
             println!(
                 r#"
 function warp() {{
+    local first="$1"
+    shift
+
+    case "$first" in
+        {ignored_arg_string})
+            warp-directory "$first" "$@"
+            return $?
+            ;;
+    esac
+
     local dir
-    dir=$(warp-directory "$@") || return $?
+    dir=$(warp-directory "$first" "$@") || return $?
     [[ -d "$dir" ]] && cd "$dir" || {{ [[ -n "$dir" ]] && print -r -- "$dir"; return 1; }}
 }}
 "#
@@ -110,7 +143,7 @@ pub fn app() {
         Some(("delete", submatches)) => delete_warp_point(submatches),
         Some(("init", submatches)) => {
             let shell = submatches.get_one::<String>("shell");
-            print_init(shell.map(|s| s.as_str()));
+            print_init(shell.map(String::as_str));
         }
         _ => {}
     }

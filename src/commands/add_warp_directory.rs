@@ -1,7 +1,11 @@
-use crate::storage::{WarpPoint, save_warp_point};
-use crate::util::get_current_directory;
 use std::path::{Path, PathBuf};
 
+use crate::{
+    storage::{WarpPoint, save_warp_point},
+    util::get_current_directory,
+};
+
+/// Returns a vector of direct non-hidden subdirectories in the given path.
 fn get_directories_in_path(path: &Path) -> Vec<PathBuf> {
     let mut directories = Vec::new();
     if let Ok(entries) = path.read_dir() {
@@ -19,6 +23,10 @@ fn get_directories_in_path(path: &Path) -> Vec<PathBuf> {
     directories
 }
 
+/// Strips the given prefix from the path's file name if it exists.
+///
+/// # Returns
+/// The file name without the prefix.
 fn strip_prefix(path: &Path, prefix: &str) -> String {
     let mut file_name = path.file_name().unwrap().to_str().unwrap();
 
@@ -31,6 +39,9 @@ fn strip_prefix(path: &Path, prefix: &str) -> String {
     file_name.to_string()
 }
 
+/// Adds a warp point for each non-hidden subdirectory in the given path.
+///
+/// Overwrites existing warp points if the `--force` flag is used.
 pub fn add_warp_directory(matches: &clap::ArgMatches) {
     let path = matches.get_one::<String>("path");
     let force = matches.get_flag("force");

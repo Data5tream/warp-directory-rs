@@ -1,5 +1,4 @@
-use clap::builder::styling;
-use clap::{Command, arg};
+use clap::{Command, arg, builder::styling};
 
 use crate::commands::{add_warp_point, delete_warp_point, list_warp_points, warp_to_point};
 
@@ -7,6 +6,7 @@ mod commands;
 mod storage;
 mod util;
 
+/// Set up the command line interface clap styles
 fn build_clap_styles() -> styling::Styles {
     styling::Styles::styled()
         .header(styling::AnsiColor::Green.on_default() | styling::Effects::BOLD)
@@ -15,6 +15,7 @@ fn build_clap_styles() -> styling::Styles {
         .placeholder(styling::AnsiColor::Cyan.on_default())
 }
 
+/// Construct the CLI command using clap
 fn construct_command() -> Command {
     Command::new("warp-directory")
         .version("0.1.0")
@@ -72,6 +73,13 @@ fn construct_command() -> Command {
         .styles(build_clap_styles())
 }
 
+/// Generate the shell function that wraps the rust binary and allows us to change the calling
+/// shells working directory
+///
+/// This functions uses the generated clap command to get all direct subcommands, aliases and flags
+/// to create a whitelist of first arguments that should **not** be wrapped in the cd function.
+/// Everything else is assumed to be a warp point and the stdout output of the command invocation
+/// will be passed to `cd`.
 fn print_init(shell: Option<&str>) {
     let command = construct_command();
     let mut ignored_args: Vec<String> = vec![
@@ -151,6 +159,16 @@ function warp() {{
     }
 }
 
+/// Main function to run the CLI application
+///
+/// Currently, supports the following subcommands:
+/// - `add`: Add a new warp point
+/// - `add-directory`: Add a directory warp point
+/// - `list`: List all warp points
+/// - `delete`: Delete a warp point
+/// - `init`: Prints the shell function to get the directory changing to work (hidden)
+///
+/// Subcommands also have short flags for easier access, they can be consulted using the help flag.
 pub fn app() {
     let matches = construct_command().get_matches();
 

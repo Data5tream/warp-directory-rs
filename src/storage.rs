@@ -1,5 +1,6 @@
-use directories::ProjectDirs;
 use std::path::Path;
+
+use directories::ProjectDirs;
 
 #[derive(serde::Serialize, serde::Deserialize, Debug)]
 pub struct WarpPoint {
@@ -27,6 +28,7 @@ fn get_storage_file() -> Box<Path> {
     std::process::exit(1);
 }
 
+/// Loads all warp points from the storage file.
 pub fn load_warp_points() -> Vec<WarpPoint> {
     let warp_points_file = get_storage_file();
     if !warp_points_file.exists() {
@@ -38,6 +40,7 @@ pub fn load_warp_points() -> Vec<WarpPoint> {
     serde_json::from_reader(reader).expect("Unable to parse warp points file")
 }
 
+/// Saves the warp points to the storage file.
 fn save_warp_points(warp_points: &[WarpPoint]) {
     let warp_points_file = get_storage_file();
     let file = std::fs::File::create(warp_points_file).expect("Unable to create warp points file");
@@ -45,6 +48,7 @@ fn save_warp_points(warp_points: &[WarpPoint]) {
     serde_json::to_writer(writer, &warp_points).expect("Unable to write warp points file");
 }
 
+/// Tries to find a warp point by name.
 pub fn get_warp_point(name: &str) -> Option<WarpPoint> {
     let warp_points = load_warp_points();
     warp_points
@@ -52,6 +56,9 @@ pub fn get_warp_point(name: &str) -> Option<WarpPoint> {
         .find(|warp_point| warp_point.name == name)
 }
 
+/// Add a new warp point to the storage file.
+///
+/// Doesn't do anything if the warp point already exists and `force` is not `true`.
 pub fn save_warp_point(new_warp_point: WarpPoint, force: bool) {
     let mut warp_points = load_warp_points();
 
@@ -81,6 +88,9 @@ pub fn save_warp_point(new_warp_point: WarpPoint, force: bool) {
     save_warp_points(&warp_points);
 }
 
+/// Removes a warp point from the storage file.
+///
+/// Doesn't do anything if the warp point doesn't exist.
 pub fn remove_warp_point(name: &str) {
     let mut warp_points = load_warp_points();
     warp_points.retain(|warp_point| warp_point.name != name);

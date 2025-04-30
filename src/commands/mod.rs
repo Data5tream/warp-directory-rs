@@ -1,3 +1,6 @@
+//! This module contains all the commands for the CLI.
+//!
+//! Commands are re-exported for easier access.
 mod add_warp_directory;
 mod add_warp_point;
 mod delete_warp_point;

@@ -1,11 +1,12 @@
-# warp-directory-rs
+# warp-directory
 
-![Crates.io Version](https://img.shields.io/crates/v/warp-directory)
-![GitHub Release](https://img.shields.io/github/v/release/data5tream/warp-directory-rs?label=GitHub%20version)
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/data5tream/warp-directory-rs/lint.yml?label=clippy)
-![GitHub License](https://img.shields.io/github/license/data5tream/warp-directory-rs)
+![Crates.io Version](https://img.shields.io/crates/v/warp-directory?style=for-the-badge)
+![Crates.io Total Downloads](https://img.shields.io/crates/d/warp-directory?style=for-the-badge)
+![GitHub Release](https://img.shields.io/github/v/release/data5tream/warp-directory-rs?label=GitHub&style=for-the-badge)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/data5tream/warp-directory-rs/lint.yml?label=clippy&style=for-the-badge)
+![GitHub License](https://img.shields.io/github/license/data5tream/warp-directory-rs?style=for-the-badge&color=blue)
 
-Save a list of directories and easily switch to them. Currently, zsh and bash are supported.
+> Easily switch between directories in your terminal with warp points. Supports zsh and bash.
 
 ## Installation
 

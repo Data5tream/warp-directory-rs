@@ -1,5 +1,6 @@
-use crate::storage::load_warp_points;
 use std::iter::repeat;
+
+use crate::storage::load_warp_points;
 
 fn pad_string(s: &str, len: usize, padding_char: Option<char>) -> String {
     let padding_char = padding_char.unwrap_or(' ');

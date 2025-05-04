@@ -69,6 +69,11 @@ fn construct_command() -> Command {
                 .about("Initialize the warp directory")
                 .arg(arg!([shell] "Name of shell").required(true)),
         )
+        .subcommand(
+            Command::new("warp-point-file")
+                .about("Print the warp point file path")
+                .hide(true)
+        )
         .arg_required_else_help(false)
         .styles(build_clap_styles())
 }
@@ -191,6 +196,10 @@ pub fn app() {
         Some(("init", submatches)) => {
             let shell = submatches.get_one::<String>("shell");
             print_init(shell.map(String::as_str));
+        }
+        Some(("warp-point-file", _)) => {
+            let path = storage::get_storage_file();
+            println!("{}", path.display());
         }
         _ => {}
     }

@@ -14,7 +14,7 @@ struct WarpPointFile {
     warp_points: Vec<WarpPoint>,
 }
 
-fn get_storage_file() -> Box<Path> {
+pub fn get_storage_file() -> Box<Path> {
     if let Some(dirs) = ProjectDirs::from("at", "b1t", "warp-directory") {
         let storage_dir = dirs.data_local_dir();
         if !storage_dir.exists() {

@@ -38,6 +38,10 @@ fn print_shell_wrapper(shell: Option<&str>) {
             println!(
                 r#"
 function warp() {{
+    if [[ -z "$1" ]]; then
+        warp-directory list
+        return 0
+    fi
     local first="$1"
     shift
 
@@ -59,6 +63,10 @@ function warp() {{
             println!(
                 r#"
 function warp() {{
+    if [[ -z "$1" ]]; then
+        warp-directory list
+        return 0
+    fi
     local first="$1"
     shift
 

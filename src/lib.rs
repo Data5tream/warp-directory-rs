@@ -42,7 +42,7 @@ fn construct_command() -> Command {
             Command::new("add-directory")
                 .short_flag('A')
                 .alias("add-dir")
-                .about("Add a directory warp point")
+                .about("Add all subdirectories of the given directory")
                 .long_about("Add a directory warp point. All direct subdirectories will be added as warp points.")
                 .arg(arg!([path] "Target path of the warp point").required(false))
                 .arg(arg!(-f --force "Force overwrite an existing warp point").required(false))
